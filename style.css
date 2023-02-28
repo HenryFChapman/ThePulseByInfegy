@@ -1,0 +1,286 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #22AAFF, #EE44EE);
+}
+
+.siteHeader {
+  margin: 5px;
+  text-align: left;
+  color: white !important;
+}
+
+.siteHeader h1 {
+  color:white !important;
+}
+
+.siteHeader p {
+  color:white !important;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.platform-button, .timeframe-button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #9C89B8, #547E98);
+}
+
+.platform-button.selected, .timeframe-button.selected {
+  background: linear-gradient(to bottom right, #00B4D8, #0077B6);
+}
+
+.timeframe-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.platform-button:hover, .timeframe-button:hover {
+  background: linear-gradient(to bottom right, #547E98, #9C89B8);
+}
+
+
+@media screen  and (min-width: 0) and (max-width: 1024px) {
+  .stat-box {
+    flex: 0 1 100% !important;
+    flex-grow: 1;
+  }
+
+  .cell {
+    flex: 0 1 50% !important;
+  }
+
+}
+
+.flex-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: black;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cell {
+  flex-basis: 16%;
+  text-align: center;
+  padding: 5px;
+}
+
+.narrativesInternet {
+  text-align: left;
+  color: white;
+}
+
+.stat-box {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  text-align: left;
+}
+
+.stat-box img{
+  height: 30px;
+  margin-left: auto;
+  float: right;
+}
+
+.stat-box h2{
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #1F5080
+}
+
+.stat-box h3{
+  text-align: center;
+}
+
+.stat-box h4 {
+  text-align: center !important;
+  text-align: left;
+  color: #1F5080
+}
+
+.stat-box p{
+  color: #919192
+}
+
+.sentimentContainer{
+  display: flex;
+}
+
+.ct-grids line {
+  stroke: #fff;
+  opacity: .05;
+  stroke-dasharray: none;
+}
+
+#volumeChart {
+  height: 100px;
+}
+
+#volumeChart {
+  height: 100px;
+}
+
+
+#volumeChart .ct-circle {
+  fill: white;
+  stroke-width: 2;
+  stroke: #75C1B4;
+}
+
+#volumeChart .ct-series-a .ct-area {
+  fill: #87BFB4;
+
+}
+
+#sentimentChart .ct-point{
+  stroke-width: 0;
+}
+
+#sentimentChart .ct-line.ct-threshold-above, .ct-point.ct-threshold-above, .ct-bar.ct-threshold-above {
+  stroke: #8FC23D;
+  stroke-width: 2;
+}
+
+#sentimentChart .ct-line.ct-threshold-below, .ct-point.ct-threshold-below, .ct-bar.ct-threshold-below {
+  stroke: #f05b4f;
+  stroke-width: 2;
+}
+
+#sentimentChart .ct-area.ct-threshold-above {
+  fill: #8FC23D;
+}
+
+#sentimentChart .ct-area.ct-threshold-below {
+  fill: #f05b4f;
+}
+
+#sentimentDonut .ct-series-a .ct-area, .ct-series-a .ct-slice-donut-solid, .ct-series-a .ct-slice-pie{
+  fill: #8FC23D;
+}
+
+.ct-fill-donut-label{
+  color: #8FC23D;
+}
+
+#volumeChart .ct-series-a .ct-line {
+  /* Set the colour of this series line */
+  stroke: #75C1B4;
+  /* Control the thikness of your lines */
+  stroke-width: 2px;
+  /* Create a dashed line with a pattern */
+}
+
+/*Series 1 on Narratives Chart*/
+#narrativesChart .ct-series-a .ct-line{
+  stroke: #75C1B4;
+}
+
+/*Series 2 on Narratives Chart*/
+#narrativesChart .ct-series-b .ct-line{
+  stroke: #836FC5;
+}
+
+/*Series 3 on Narratives Chart*/
+#narrativesChart .ct-series-c .ct-line{
+  stroke: #F1CE45;
+}
+
+/*Series 4 on Narratives Chart*/
+#narrativesChart .ct-series-d .ct-line{
+  stroke: #E28747;
+}
+
+/*Series 5 on Narratives Chart*/
+#narrativesChart .ct-series-e .ct-line{
+  stroke: #DD5092;
+}
+
+/*Series 6 on Narratives Chart*/
+#narrativesChart .ct-series-f .ct-line {
+  stroke: #C1AC8D;
+}
+
+#cell1 H5 {
+  color: #75C1B4;
+}
+
+#cell2 H5 {
+  color: #836FC5;
+}
+
+#cell3 H5 {
+  color: #F1CE45;
+}
+
+#cell4 H5 {
+  color: #E28747;
+}
+
+#cell5 H5 {
+  color: #DD5092;
+}
+
+#cell6 H5 {
+  color: #C1AC8D;
+}
+
+#cell1 H3 {
+  color: #75C1B4;
+}
+
+#cell2 H3 {
+  color: #836FC5;
+}
+
+#cell3 H3 {
+  color: #F1CE45;
+}
+
+#cell4 H3 {
+  color: #E28747;
+}
+
+#cell5 H3 {
+  color: #DD5092;
+}
+
+#cell6 H3 {
+  color: #C1AC8D;
+}

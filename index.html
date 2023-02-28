@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Pulse by Infegy</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+  <script src="https://www.infegy.com/hubfs/Insight%20Briefs/RankingNarratives/chartist-plugin-threshold.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+
+    body {
+      background: linear-gradient(to right, #22AAFF, #EE44EE);
+    }
+
+    .ctaClass, .ctaClass H3 {
+      margin: 25px;
+      color: white !important;
+      text-align: center;
+    }
+
+    .centered-button {
+      display: inline-block;
+      border: 2px solid white;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #22aaff;
+      cursor: pointer;
+      background: white;
+    }
+
+    .siteHeader {
+      margin: 5px;
+      text-align: left;
+      color: white !important;
+    }
+
+    .siteHeader h1 {
+      color:white !important;
+    }
+
+    .siteHeader p {
+      color:white !important;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .platform-button, .timeframe-button, .cta-button {
+      border: 2px solid white;
+      border-radius: 20px;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #22aaff;
+      cursor: pointer;
+      background: white;
+    }
+
+    .platform-button.selected, .timeframe-button.selected {
+      border: 2px solid #005184;
+      background:  #005184;
+      color: white;
+    }
+
+    .timeframe-buttons {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .platform-button:hover, .timeframe-button:hover, .cta-button:hover {
+      border: 2px solid  #005184;
+      border-radius: 20px;
+    }
+
+
+    @media screen  and (min-width: 0) and (max-width: 1024px) {
+      .buttons {
+        display: inline;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .stat-box {
+        flex: 0 1 100% !important;
+        flex-grow: 1;
+      }
+
+      .cell {
+        flex: 0 1 50% !important;
+      }
+
+    }
+
+    .flex-table {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      color: black;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .cell {
+      flex-basis: 16%;
+      text-align: center;
+      padding: 5px;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .narrativesInternet {
+      text-align: left;
+      color: white;
+    }
+
+    .stat-box {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      flex: 1;
+      margin: 10px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .stat-box img{
+      height: 30px;
+      margin-left: auto;
+      float: right;
+    }
+
+    .stat-box h2{
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: left;
+      color: #1F5080
+    }
+
+    .stat-box h3{
+      text-align: center;
+    }
+
+    .stat-box h4 {
+      text-align: center !important;
+      text-align: left;
+      color: #1F5080
+    }
+
+    .stat-box p{
+      color: #919192
+    }
+
+    .sentimentContainer{
+      display: flex;
+    }
+
+    .ct-grids line {
+      stroke: #fff;
+      opacity: .05;
+      stroke-dasharray: none;
+    }
+
+    #volumeChart {
+      height: 100px;
+    }
+
+    #volumeChart {
+      height: 100px;
+    }
+
+
+    #volumeChart .ct-circle {
+      fill: white;
+      stroke-width: 2;
+      stroke: #75C1B4;
+    }
+
+    #volumeChart .ct-series-a .ct-area {
+      fill: #87BFB4;
+
+    }
+
+    #sentimentChart .ct-point{
+      stroke-width: 0;
+    }
+
+    #sentimentChart .ct-line.ct-threshold-above, .ct-point.ct-threshold-above, .ct-bar.ct-threshold-above {
+      stroke: #8FC23D;
+      stroke-width: 2;
+    }
+
+    #sentimentChart .ct-line.ct-threshold-below, .ct-point.ct-threshold-below, .ct-bar.ct-threshold-below {
+      stroke: #f05b4f;
+      stroke-width: 2;
+    }
+
+    #sentimentChart .ct-area.ct-threshold-above {
+      fill: #8FC23D;
+    }
+
+    #sentimentChart .ct-area.ct-threshold-below {
+      fill: #f05b4f;
+    }
+
+    #sentimentDonut .ct-series-a .ct-area, .ct-series-a .ct-slice-donut-solid, .ct-series-a .ct-slice-pie{
+      fill: #8FC23D;
+    }
+
+    .ct-fill-donut-label{
+      color: #8FC23D;
+    }
+
+    #volumeChart .ct-series-a .ct-line {
+      /* Set the colour of this series line */
+      stroke: #75C1B4;
+      /* Control the thikness of your lines */
+      stroke-width: 2px;
+      /* Create a dashed line with a pattern */
+    }
+
+/*Series 1 on Narratives Chart*/
+#narrativesChart .ct-series-a .ct-line{
+  stroke: #75C1B4;
+}
+
+/*Series 2 on Narratives Chart*/
+#narrativesChart .ct-series-b .ct-line{
+  stroke: #836FC5;
+}
+
+/*Series 3 on Narratives Chart*/
+#narrativesChart .ct-series-c .ct-line{
+  stroke: #F1CE45;
+}
+
+/*Series 4 on Narratives Chart*/
+#narrativesChart .ct-series-d .ct-line{
+  stroke: #E28747;
+}
+
+/*Series 5 on Narratives Chart*/
+#narrativesChart .ct-series-e .ct-line{
+  stroke: #DD5092;
+}
+
+/*Series 6 on Narratives Chart*/
+#narrativesChart .ct-series-f .ct-line {
+  stroke: #C1AC8D;
+}
+
+.cell H3 {
+  margin-bottom: 5px;
+}
+
+#cell1 H5 {
+  color: #75C1B4;
+}
+
+#cell2 H5 {
+  color: #836FC5;
+}
+
+#cell3 H5 {
+  color: #F1CE45;
+}
+
+#cell4 H5 {
+  color: #E28747;
+}
+
+#cell5 H5 {
+  color: #DD5092;
+}
+
+#cell6 H5 {
+  color: #C1AC8D;
+}
+
+#cell1 H3 {
+  color: #75C1B4;
+}
+
+#cell2 H3 {
+  color: #836FC5;
+}
+
+#cell3 H3 {
+  color: #F1CE45;
+}
+
+#cell4 H3 {
+  color: #E28747;
+}
+
+#cell5 H3 {
+  color: #DD5092;
+}
+
+#cell6 H3 {
+  color: #C1AC8D;
+}</style>
+</head>
+
+<body>
+  <div class="siteHeader">
+    <h1>The Pulse by Infegy</h1>
+    <p>Using our state-of-the-art Entity detection, we're analyzing millions of social media posts that we've collected on across leading social channels over the last days, weeks, and months. Here, you'll be able to see the relevant conversational topics, post volume, and general flow of Tiktok, Twitter, and Instagram.</p>
+
+
+    <div class="buttons">
+      <button class="platform-button selected" id="tiktok-button">Tiktok</button>
+      <button class="platform-button" id="twitter-button">Twitter</button>
+      <button class="platform-button" id="instagram-button">Instagram</button>
+
+      <div class="timeframe-buttons">
+        <button class="timeframe-button selected" id="48h-button">Last 48 Hours</button>
+        <button class="timeframe-button" id="7d-button">Last Week</button>
+        <button class="timeframe-button" id="30d-button">Last Month</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="narrativesInternet">
+    <div class="stat-box narratives">
+      <h2>Entities Graph
+        <img src="https://www.infegy.com/hubfs/Insight%20Briefs/RankingNarratives/Logos/logo.png"></img>
+      </h2>
+      <p>This section  shows you the Entities that have appeared most frequently over the last 48 hours, 7 days, or in the past month. Entities are well-known people, places, things, or companies. We use AI to detect how frequently they rise and fall in importance.</p>
+
+      <div class='narrativesChart' id="narrativesChart"></div>
+      <div class="flex-table" id="flex-table">
+        <div class="row header" id="header-row">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctaClass">
+    <h3>Want to drill into the data and learn why people are discussing these and other topics?</h3>
+    <button onclick="location.href='https://www.infegy.com/resources/demo'" class="cta-button" type="button">Request Demo</button>
+
+  </div>
+
+
+  <main>
+    <div class="stat-box tiktok">
+      <h2>Tiktok
+        <img src="https://www.infegy.com/hubfs/Insight%20Briefs/RankingNarratives/Logos/tiktok.png"></img>
+      </h2>
+      <p>A video-sharing social networking service.</p>
+      <H4>Post Volume</H4>
+      <div class="tiktok-chart1" id=volumeChart></div>
+      <H4>Platform Sentiment</H4>
+      <div class="tiktok-chart3" id=sentimentChart></div>
+      <div class="flex-table" id="flex-table">
+        <div class="row header" id="header-row">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stat-box twitter">
+      <h2>Twitter
+        <img src="https://www.infegy.com/hubfs/Insight%20Briefs/RankingNarratives/Logos/twitter.png"></img>
+      </h2>
+      <p>A microblogging service.</p>
+      <H4>Post Volume</H4>
+      <div class="twitter-chart1" id=volumeChart></div>
+      <H4>Platform Sentiment</H4>
+      <div class="twitter-chart3" id=sentimentChart></div>
+      <div class="flex-table" id="flex-table">
+        <div class="row header" id="header-row">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="stat-box instagram">
+      <h2>Instagram
+        <img src="https://www.infegy.com/hubfs/Insight%20Briefs/RankingNarratives/Logos/instagram.png"></img>
+      </h2>
+      <p>A photo and video-sharing service.</p>
+      <H4>Post Volume</H4>
+      <div class="instagram-chart1" id=volumeChart></div>
+      <H4>Platform Sentiment</H4>
+      <div class="instagram-chart3" id=sentimentChart></div>
+      <div class="flex-table" id="flex-table">
+        <div class="row header" id="header-row">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.infegy.com/hubfs/Insight%20Briefs/RankingNarratives/app.js"></script>
+</body>
+</html>
